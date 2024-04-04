@@ -125,8 +125,8 @@ const Main: React.FC = () => {
           {selectedCustomer && (
             <div>
               <h2>{selectedCustomer.name}</h2>
-              <p>Title: {selectedCustomer.company}</p>
-              <p>Address: {selectedCustomer.address}, {selectedCustomer.address}</p>
+              <p><b>Title</b>: {selectedCustomer.company}</p>
+              <p><b>Address</b>: {selectedCustomer.address}, {selectedCustomer.address}</p>
               <div className="photo-grid">
                 {photoUrls.map((url, index) => (
                   <img
