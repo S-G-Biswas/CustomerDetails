@@ -22,11 +22,15 @@ any card the details of that perticular card will be render on right side along 
 - tsconfig.json
 
 ## Video walkthrough of the project
-link: 
+link: https://drive.google.com/file/d/1AHlLrl2oBiGKDvYzWMVRkaR1TbC8IKhY/view?usp=sharing
 
 ## Features
 - User list is there in the form of card with infinite scrolling. 
 - upon clicking on any customer card the cutomer details will be visible of right side.
+
+## API Used
+- For customer details :- https://660ead7a356b87a55c4fbd26.mockapi.io/customer/users
+- For images :-  https://source.unsplash.com/random/200x200
 
 ## Installation and Getting Started
 ### clone this repo & run the below command
