@@ -14,7 +14,7 @@ const Main: React.FC = () => {
   const [photoUrls, setPhotoUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [start, setStart] = useState<number>(0);
-  const limit = 5; 
+  const limit = 5;
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastCustomerElementRef = useRef<HTMLDivElement>(null);
@@ -42,6 +42,12 @@ const Main: React.FC = () => {
       }
     };
   }, [customers]);
+
+  useEffect(() => {
+    // Fetching new photos for the selected customer every 10 seconds
+    const intervalId = setInterval(fetchNewPhotos, 10000);
+    return () => clearInterval(intervalId);
+  }, [selectedCustomer]);
 
   const fetchCustomers = async () => {
     setIsLoading(true);
@@ -78,6 +84,22 @@ const Main: React.FC = () => {
       setPhotoUrls(newPhotoUrls);
     } catch (error) {
       console.error('Error fetching new photos: ', error);
+    }
+  };
+
+  const fetchNewPhotos = async () => {
+    if (selectedCustomer) {
+      const newPhotoPromises = Array.from(Array(9).keys()).map((_, index) =>
+        fetch(`https://source.unsplash.com/random/200x200?sig=${index + 2000}`) // Adding 2000 to ensure different photos from the initial set
+          .then(response => response.url)
+      );
+
+      try {
+        const newPhotoUrls = await Promise.all(newPhotoPromises);
+        setPhotoUrls(newPhotoUrls);
+      } catch (error) {
+        console.error('Error fetching new photos: ', error);
+      }
     }
   };
 
